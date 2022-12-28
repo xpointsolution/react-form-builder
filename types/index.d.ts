@@ -117,6 +117,15 @@ export type ToolbarItem = {
   content: string;
 };
 
+export type Lang = {
+  messages: { [x: string]: string };
+  locale: string;
+};
+
+export type Locale = {
+  [x: string]: Lang;
+};
+
 export interface FormBuilderProps {
   toolbarItems?: ToolbarItem[];
   files?: any[];
@@ -129,6 +138,8 @@ export interface FormBuilderProps {
   saveAlways?: boolean;
   editMode?: boolean;
   renderEditForm?: (props: BaseElement) => React.ReactNode;
+  locale?: string;
+  appLocaleOverride?: Locale;
 }
 
 export class ReactFormBuilder extends React.Component<FormBuilderProps> {}
@@ -156,6 +167,8 @@ export interface FormGeneratorProps {
   read_only?: boolean;
   // eslint-disable-next-line no-undef
   variables?: Record<any, any>;
+  locale?: string;
+  appLocaleOverride?: Locale;
 }
 
 export class ReactFormGenerator extends React.Component<FormGeneratorProps> {}
