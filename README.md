@@ -9,6 +9,7 @@ A complete react form builder that interfaces with a json endpoint to load and s
 - Show posted data on readonly form
 - Multi column row
 - Custom Components
+- Extendable localization using react-intl
 
 [DEMO](https://kiho.github.io/react-form-builder/) Slow Loading.... back-end is running at FREE Heroku, hence it may not work if free time runs out for month.
 
@@ -96,7 +97,8 @@ skip_validations | boolean | Optional | Suppress form validations on submit, if 
 display_short | boolean | Optional | Display an optional "shorter page/form" which is common for legal documents or situations where the user will just have to sign or fill out a shorter form with only the critical elements.
 read_only | boolean | Optional | Shows a read only version which has fields disabled and removes "required" labels.
 variables | object | Optional | Key/value object that can be used for Signature variable replacement.
-
+locale | string | Optional | Language code determining which locale is used.
+appLocaleOverride | object | Optional | Additional Locale data used to extend or override provided default react-intl messages.
 ### Read only Signatures
 
 Read only signatures allow you to use a saved/canned signature to be placed into the form. The signature will be passed in through the `variables` property to `ReactFormGenerator` and `ReactFormBuilder`.
