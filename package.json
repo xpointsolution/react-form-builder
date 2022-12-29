@@ -1,6 +1,6 @@
 {
   "name": "react-form-builder4",
-  "version": "0.14.5",
+  "version": "0.14.6",
   "description": "A complete form builder for react.",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
