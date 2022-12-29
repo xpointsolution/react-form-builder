@@ -441,7 +441,7 @@ class Toolbar extends React.Component {
     store.dispatch('create', this.create(item));
   }
 
-  renderItem = (item) => (<ToolbarItem data={item} key={item} onClick={this._onClick.bind(this, item)} onCreate={this.create} />)
+  renderItem = (item) => (<ToolbarItem data={item} key={`${item.key}_${ID.uuid}`} onClick={this._onClick.bind(this, item)} onCreate={this.create} />)
 
   render() {
     const { items, grouped, groupKeys } = buildGroupItems(this.state.items);
