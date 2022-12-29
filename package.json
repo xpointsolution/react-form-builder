@@ -1,5 +1,5 @@
 {
-  "name": "react-form-builder2",
+  "name": "react-form-builder4",
   "version": "0.14.3",
   "description": "A complete form builder for react.",
   "main": "lib/index.js",
@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kiho/react-form-builder.git"
+    "url": "git+https://github.com/xpointsolution/react-form-builder.git"
   },
   "files": [
     "lib",
@@ -32,6 +32,10 @@
       "name": "Zach Robichaud",
       "email": "zach2825@gmail.com",
       "url": "https://turtlebytes.com"
+    },
+    {
+      "name": "Alexander Mudzo",
+      "email": "alexander.mudzo@gmail.com"
     }
   ],
   "dependencies": {
