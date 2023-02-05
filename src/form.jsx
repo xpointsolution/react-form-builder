@@ -21,6 +21,10 @@ class ReactForm extends React.Component {
 
   inputs = {};
 
+  state = {
+    errors: {},
+  };
+
   answerData;
 
   constructor(props) {
@@ -195,15 +199,17 @@ class ReactForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    let errors = [];
+    let errors = {};
     if (!this.props.skip_validations) {
       errors = this.validateForm();
-      // Publish errors, if any.
-      this.emitter.emit('formValidation', errors);
+
+      // Publish only error validation messages, if any.
+      this.setState({ errors });
+      this.emitter.emit('formValidation', Object.values(errors));
     }
 
     // Only submit if there are no errors.
-    if (errors.length < 1) {
+    if (Object.keys(errors).length.length < 1) {
       const { onSubmit } = this.props;
       if (onSubmit) {
         const data = this._collectFormData(this.props.data);
@@ -216,7 +222,7 @@ class ReactForm extends React.Component {
   }
 
   validateForm() {
-    const errors = [];
+    const errors = {};
     let data_items = this.props.data;
     const { intl } = this.props;
 
@@ -230,7 +236,7 @@ class ReactForm extends React.Component {
       }
 
       if (this._isInvalid(item)) {
-        errors.push(`${item.label} ${intl.formatMessage({ id: 'message.is-required' })}!`);
+        errors[item.field_name] = `${item.label} ${intl.formatMessage({ id: 'message.is-required' })}!`;
       }
 
       if (item.element === 'EmailInput') {
@@ -243,7 +249,7 @@ class ReactForm extends React.Component {
             );
           const checkEmail = validateEmail(emailValue);
           if (!checkEmail) {
-            errors.push(`${item.label} ${intl.formatMessage({ id: 'message.invalid-email' })}`);
+            errors[item.field_name] = `${item.label}: ${intl.formatMessage({ id: 'message.invalid-email' })}`;
           }
         }
       }
@@ -258,13 +264,13 @@ class ReactForm extends React.Component {
           );
           const checkPhone = validatePhone(phoneValue);
           if (!checkPhone) {
-            errors.push(`${item.label} ${intl.formatMessage({ id: 'message.invalid-phone-number' })}`);
+            errors[item.field_name] = `${item.label}: ${intl.formatMessage({ id: 'message.invalid-phone-number' })}`;
           }
         }
       }
 
       if (this.props.validateForCorrectness && this._isIncorrect(item)) {
-        errors.push(`${item.label} ${intl.formatMessage({ id: 'message.was-answered-incorrectly' })}!`);
+        errors[item.field_name] = `${item.label} ${intl.formatMessage({ id: 'message.was-answered-incorrectly' })}!`;
       }
     });
 
@@ -277,6 +283,8 @@ class ReactForm extends React.Component {
   }
 
   getInputElement(item) {
+    const validationMessage = this.state.errors[item.field_name];
+
     if (item.custom) {
       return this.getCustomElement(item);
     }
@@ -288,7 +296,10 @@ class ReactForm extends React.Component {
       key={`form_${item.id}`}
       data={item}
       read_only={this.props.read_only}
-      defaultValue={this._getDefaultValue(item)} />);
+      defaultValue={this._getDefaultValue(item)}
+      inlineValidation={this.props.inlineValidation}
+      validationMessage={validationMessage}
+      />);
   }
 
   getContainerElement(item, Element) {
@@ -410,7 +421,8 @@ class ReactForm extends React.Component {
     };
     return (
       <div>
-          <FormValidator emitter={this.emitter} />
+          {/* Hide top validation messaged display if inlineValidation */}
+          {!this.props.inlineValidation && (<FormValidator emitter={this.emitter} />)}
           <div className='react-form-builder-form'>
             <form encType='multipart/form-data' ref={c => this.form = c} action={this.props.form_action} onSubmit={this.handleSubmit.bind(this)} method={this.props.form_method}>
               {this.props.authenticity_token &&

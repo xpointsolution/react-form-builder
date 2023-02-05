@@ -92,7 +92,6 @@ class TextInput extends React.Component {
   render() {
     const props = {};
     props.type = 'text';
-    props.className = 'form-control';
     props.name = this.props.data.field_name;
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
@@ -100,18 +99,27 @@ class TextInput extends React.Component {
     }
 
     let baseClasses = 'SortableItem rfb-item';
+
+    let inputClasses = 'form-control';
+
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
 
     if (this.props.read_only) {
       props.disabled = 'disabled';
     }
 
+    const showValidationErrors = this.props.inlineValidation && this.props.validationMessage;
+
+    if (showValidationErrors) { inputClasses += ' invalid'; }
+
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
         <div className="form-group">
           <ComponentLabel {...this.props} />
-          <input {...props} />
+          <input {...props} className={inputClasses}/>
+          {showValidationErrors &&
+                <span className='error'>{this.props.validationMessage}</span>}
         </div>
       </div>
     );
@@ -127,7 +135,6 @@ class EmailInput extends React.Component {
   render() {
     const props = {};
     props.type = 'text';
-    props.className = 'form-control';
     props.name = this.props.data.field_name;
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
@@ -135,18 +142,27 @@ class EmailInput extends React.Component {
     }
 
     let baseClasses = 'SortableItem rfb-item';
+
+    let inputClasses = 'form-control';
+
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
 
     if (this.props.read_only) {
       props.disabled = 'disabled';
     }
 
+    const showValidationErrors = this.props.inlineValidation && this.props.validationMessage;
+
+    if (showValidationErrors) { inputClasses += ' invalid'; }
+
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
         <div className="form-group">
           <ComponentLabel {...this.props} />
-          <input {...props} />
+          <input {...props} className={inputClasses}/>
+          {showValidationErrors &&
+                <span className='error'>{this.props.validationMessage}</span>}
         </div>
       </div>
     );
@@ -162,7 +178,6 @@ class PhoneNumber extends React.Component {
   render() {
     const props = {};
     props.type = 'tel';
-    props.className = 'form-control';
     props.name = this.props.data.field_name;
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
@@ -170,18 +185,27 @@ class PhoneNumber extends React.Component {
     }
 
     let baseClasses = 'SortableItem rfb-item';
+
+    let inputClasses = 'form-control';
+
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
 
     if (this.props.read_only) {
       props.disabled = 'disabled';
     }
 
+    const showValidationErrors = this.props.inlineValidation && this.props.validationMessage;
+
+    if (showValidationErrors) { inputClasses += ' invalid'; }
+
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
         <div className="form-group">
           <ComponentLabel {...this.props} />
-          <input {...props} />
+          <input {...props} className={inputClasses}/>
+          {showValidationErrors &&
+                <span className='error'>{this.props.validationMessage}</span>}
         </div>
       </div>
     );
@@ -197,7 +221,6 @@ class NumberInput extends React.Component {
   render() {
     const props = {};
     props.type = 'number';
-    props.className = 'form-control';
     props.name = this.props.data.field_name;
 
     if (this.props.mutable) {
@@ -210,14 +233,23 @@ class NumberInput extends React.Component {
     }
 
     let baseClasses = 'SortableItem rfb-item';
+
+    let inputClasses = 'form-control';
+
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
+
+    const showValidationErrors = this.props.inlineValidation && this.props.validationMessage;
+
+    if (showValidationErrors) { inputClasses += ' invalid'; }
 
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
         <div className="form-group">
           <ComponentLabel {...this.props} />
-          <input {...props} />
+          <input {...props} className={inputClasses}/>
+          {showValidationErrors &&
+                <span className='error'>{this.props.validationMessage}</span>}
         </div>
       </div>
     );
@@ -232,7 +264,6 @@ class TextArea extends React.Component {
 
   render() {
     const props = {};
-    props.className = 'form-control';
     props.name = this.props.data.field_name;
 
     if (this.props.read_only) {
@@ -245,14 +276,23 @@ class TextArea extends React.Component {
     }
 
     let baseClasses = 'SortableItem rfb-item';
+
+    let inputClasses = 'form-control';
+
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
+
+    const showValidationErrors = this.props.inlineValidation && this.props.validationMessage;
+
+    if (showValidationErrors) { inputClasses += ' invalid'; }
 
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
         <div className="form-group">
           <ComponentLabel {...this.props} />
-          <textarea {...props} />
+          <textarea {...props} className={inputClasses}/>
+          {showValidationErrors &&
+                <span className='error'>{this.props.validationMessage}</span>}
         </div>
       </div>
     );
@@ -267,7 +307,6 @@ class Dropdown extends React.Component {
 
   render() {
     const props = {};
-    props.className = 'form-control';
     props.name = this.props.data.field_name;
 
     if (this.props.mutable) {
@@ -280,19 +319,28 @@ class Dropdown extends React.Component {
     }
 
     let baseClasses = 'SortableItem rfb-item';
+
+    let inputClasses = 'form-control';
+
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
+
+    const showValidationErrors = this.props.inlineValidation && this.props.validationMessage;
+
+    if (showValidationErrors) { inputClasses += ' invalid'; }
 
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
         <div className="form-group">
           <ComponentLabel {...this.props} />
-          <select {...props}>
+          <select {...props} className={inputClasses}>
             {this.props.data.options.map((option) => {
               const this_key = `preview_${option.key}`;
               return <option value={option.value} key={this_key}>{option.text}</option>;
             })}
           </select>
+          {showValidationErrors &&
+                <span className='error'>{this.props.validationMessage}</span>}
         </div>
       </div>
     );
@@ -432,7 +480,14 @@ class Checkboxes extends React.Component {
     if (this.props.data.inline) { classNames += ' option-inline'; }
 
     let baseClasses = 'SortableItem rfb-item';
+
+    let inputClasses = 'custom-control-input';
+
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
+
+    const showValidationErrors = this.props.inlineValidation && this.props.validationMessage;
+
+    if (showValidationErrors) { inputClasses += ' invalid'; }
 
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
@@ -454,7 +509,7 @@ class Checkboxes extends React.Component {
             }
             return (
               <div className={classNames} key={this_key}>
-                <input id={`fid_${this_key}`} className="custom-control-input" ref={c => {
+                <input id={`fid_${this_key}`} className={inputClasses} ref={c => {
                   if (c && self.props.mutable) {
                     self.options[`child_ref_${option.key}`] = c;
                   }
@@ -463,6 +518,8 @@ class Checkboxes extends React.Component {
               </div>
             );
           })}
+          {showValidationErrors &&
+                <span className='error'>{this.props.validationMessage}</span>}
         </div>
       </div>
     );
@@ -480,8 +537,14 @@ class RadioButtons extends React.Component {
     let classNames = 'custom-control custom-radio';
     if (this.props.data.inline) { classNames += ' option-inline'; }
 
+    let inputClasses = 'custom-control-input';
+
     let baseClasses = 'SortableItem rfb-item';
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
+
+    const showValidationErrors = this.props.inlineValidation && this.props.validationMessage;
+
+    if (showValidationErrors) { inputClasses += ' invalid'; }
 
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
@@ -505,7 +568,7 @@ class RadioButtons extends React.Component {
 
             return (
               <div className={classNames} key={this_key}>
-                <input id={`fid_${this_key}`} className="custom-control-input" ref={c => {
+                <input id={`fid_${this_key}`} className={inputClasses} ref={c => {
                   if (c && self.props.mutable) {
                     self.options[`child_ref_${option.key}`] = c;
                   }
@@ -514,6 +577,8 @@ class RadioButtons extends React.Component {
               </div>
             );
           })}
+          {showValidationErrors &&
+                <span className='error'>{this.props.validationMessage}</span>}
         </div>
       </div>
     );
@@ -560,14 +625,23 @@ class Rating extends React.Component {
     }
 
     let baseClasses = 'SortableItem rfb-item';
+
+    let inputClasses = '';
+
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
+
+    const showValidationErrors = this.props.inlineValidation && this.props.validationMessage;
+
+    if (showValidationErrors) { inputClasses += ' invalid'; }
 
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
         <div className="form-group">
           <ComponentLabel {...this.props} />
-          <StarRating {...props} />
+          <StarRating {...props} className={inputClasses}/>
+          {showValidationErrors &&
+                <span className='error'>{this.props.validationMessage}</span>}
         </div>
       </div>
     );
@@ -897,7 +971,7 @@ class Range extends React.Component {
     if (this.props.read_only) {
       props.disabled = 'disabled';
     }
-    
+
     let baseClasses = 'SortableItem rfb-item';
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
 

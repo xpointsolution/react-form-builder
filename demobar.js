@@ -116,7 +116,9 @@ export default class Demobar extends React.Component {
                   // onSubmit={this._onSubmit}
                   variables={this.props.variables}
                   data={this.state.data}
-                  locale='en'/>
+                  locale='en'
+                  inlineValidation
+                  />
 
                 <div className="modal-footer">
                   <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closePreview.bind(this)}>Close</button>

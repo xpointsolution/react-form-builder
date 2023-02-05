@@ -169,6 +169,7 @@ export interface FormGeneratorProps {
   variables?: Record<any, any>;
   locale?: string;
   appLocaleOverride?: Locale;
+  inlineValidation?: boolean;
 }
 
 export class ReactFormGenerator extends React.Component<FormGeneratorProps> {}
