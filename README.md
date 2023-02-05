@@ -99,6 +99,7 @@ read_only | boolean | Optional | Shows a read only version which has fields disa
 variables | object | Optional | Key/value object that can be used for Signature variable replacement.
 locale | string | Optional | Language code determining which locale is used.
 appLocaleOverride | object | Optional | Additional Locale data used to extend or override provided default react-intl messages.
+inlineValidation  | boolean | Optional | If specified validation messages will be shown under the input instead of validation banner.
 ### Read only Signatures
 
 Read only signatures allow you to use a saved/canned signature to be placed into the form. The signature will be passed in through the `variables` property to `ReactFormGenerator` and `ReactFormBuilder`.
