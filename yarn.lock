@@ -6383,7 +6383,7 @@ react-is@^16.13.1, react-is@^16.7.0:
 
 react-js-banner@^0.6.0-beta3:
   version "0.6.0-beta3"
-  resolved "https://registry.yarnpkg.com/react-js-banner/-/react-js-banner-0.6.0-beta3.tgz#f6f50f247b2f509a1e3a369860ce563dd8943ed5"
+  resolved "https://registry.npmjs.org/react-js-banner/-/react-js-banner-0.6.0-beta3.tgz"
   integrity sha512-GEbT9Ds8xDTwX27CbmjuJRaqHAV+T1k1HMKIM9VdWt5UuPYCw8sJI1uZ22K+pEQ5rZIz78BEyGWFkUpH7V9IXQ==
 
 react-onclickoutside@^6.10.0:
