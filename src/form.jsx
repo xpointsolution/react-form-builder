@@ -6,6 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { EventEmitter } from 'fbemitter';
 import { injectIntl } from 'react-intl';
+import Banner from 'react-js-banner';
 import FormValidator from './form-validator';
 import FormElements from './form-elements';
 import { TwoColumnRow, ThreeColumnRow, MultiColumnRow } from './multi-column';
@@ -23,6 +24,8 @@ class ReactForm extends React.Component {
 
   state = {
     errors: {},
+    showingApiError: false,
+    showingSuccessfulSubmit: false,
   };
 
   answerData;
@@ -204,20 +207,28 @@ class ReactForm extends React.Component {
       errors = this.validateForm();
 
       // Publish only error validation messages, if any.
-      this.setState({ errors });
+      this.setState({ ...this.state, errors });
       this.emitter.emit('formValidation', Object.values(errors));
     }
 
     // Only submit if there are no errors.
-    if (Object.keys(errors).length.length < 1) {
+    if (Object.keys(errors).length < 1) {
       const { onSubmit } = this.props;
       if (onSubmit) {
         const data = this._collectFormData(this.props.data);
-        onSubmit(data);
+        onSubmit(data)
+        .then(() => this.showBanner(true))
+        .catch(() => this.showBanner(false));
       } else {
         const $form = ReactDOM.findDOMNode(this.form);
         $form.submit();
       }
+    }
+  }
+
+  showBanner(successful) {
+    if (this.props.showSubmitMessage) {
+      this.setState({ ...this.state, showingApiError: !successful, showingSuccessfulSubmit: successful });
     }
   }
 
@@ -419,6 +430,13 @@ class ReactForm extends React.Component {
     const formTokenStyle = {
       display: 'none',
     };
+
+    const bannerStyle = this.state.showingSuccessfulSubmit ? { color: '#FFF', backgroundColor: 'green' } : { color: '#FFF', backgroundColor: 'red' };
+
+    const bannerText = this.state.showingSuccessfulSubmit
+      ? this.props.submitMessageText ?? this.props.intl.formatMessage({ id: 'message.submit-successful' })
+      : this.props.intl.formatMessage({ id: 'error.sending-request-failed' });
+
     return (
       <div>
           {/* Hide top validation messaged display if inlineValidation */}
@@ -442,6 +460,12 @@ class ReactForm extends React.Component {
                 }
               </div>
             </form>
+            <Banner
+              title={bannerText}
+              css={bannerStyle}
+              showBanner={this.state.showingApiError || this.state.showingSuccessfulSubmit}
+              visibleTime={5000}
+            />
           </div>
       </div>
     );

@@ -154,7 +154,7 @@ export interface FormGeneratorProps {
   form_action: string;
   form_method: string;
   action_name?: string;
-  onSubmit?: (info: FormGeneratorOnSubmitParams[]) => void;
+  onSubmit?: (info: FormGeneratorOnSubmitParams[]) => Promise<void>;
   data: any[];
   back_action?: string;
   back_name?: string;
@@ -170,6 +170,8 @@ export interface FormGeneratorProps {
   locale?: string;
   appLocaleOverride?: Locale;
   inlineValidation?: boolean;
+  submitMessageText?: string;
+  showSubmitMessage?: boolean;
 }
 
 export class ReactFormGenerator extends React.Component<FormGeneratorProps> {}

@@ -78,6 +78,9 @@
 
   "message.is-required": "không được bỏ trống",
   "message.was-answered incorrectly": "đã trả lời sai",
-  "message.was-not-registered": "chưa đăng ký"
+  "message.was-not-registered": "chưa đăng ký",
+  "message.submit-successful" : "Yêu cầu của bạn đã được gửi thành công!",
+  
+  "error.sending-request-failed" : "Xin lỗi, chúng tôi không thể hoàn thành yêu cầu của bạn. Vui lòng thử lại sau."
   
 }
