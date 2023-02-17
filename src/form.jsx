@@ -7,6 +7,10 @@ import ReactDOM from 'react-dom';
 import { EventEmitter } from 'fbemitter';
 import { injectIntl } from 'react-intl';
 import Banner from 'react-js-banner';
+import { registerLocale, setDefaultLocale } from 'react-datepicker';
+import de from 'date-fns/locale/de';
+import en from 'date-fns/locale/en-US';
+import vi from 'date-fns/locale/vi';
 import FormValidator from './form-validator';
 import FormElements from './form-elements';
 import { TwoColumnRow, ThreeColumnRow, MultiColumnRow } from './multi-column';
@@ -17,6 +21,11 @@ const {
   Image, Checkboxes, Signature, Download, Camera, FileUpload,
 } = FormElements;
 
+const usableLocales = {
+  en,
+  de,
+  vi,
+};
 class ReactForm extends React.Component {
   form;
 
@@ -436,6 +445,12 @@ class ReactForm extends React.Component {
     const bannerText = this.state.showingSuccessfulSubmit
       ? this.props.submitMessageText ?? this.props.intl.formatMessage({ id: 'message.submit-successful' })
       : this.props.intl.formatMessage({ id: 'error.sending-request-failed' });
+
+    // FormBuilder datePicker formats
+    if (usableLocales[this.props.locale] !== undefined) {
+      registerLocale(this.props.locale, usableLocales[this.props.locale]);
+      setDefaultLocale(this.props.locale);
+    }
 
     return (
       <div>
