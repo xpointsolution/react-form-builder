@@ -33,8 +33,9 @@ class ReactForm extends React.Component {
 
   state = {
     errors: {},
-    showingApiError: false,
-    showingSuccessfulSubmit: false,
+    showingBanner: false,
+    submitOk: undefined,
+    attemptingSubmit: false,
   };
 
   answerData;
@@ -221,23 +222,27 @@ class ReactForm extends React.Component {
     }
 
     // Only submit if there are no errors.
-    if (Object.keys(errors).length < 1) {
-      const { onSubmit } = this.props;
-      if (onSubmit) {
-        const data = this._collectFormData(this.props.data);
-        onSubmit(data)
-        .then(() => this.showBanner(true))
-        .catch(() => this.showBanner(false));
-      } else {
-        const $form = ReactDOM.findDOMNode(this.form);
-        $form.submit();
-      }
+    if (Object.keys(errors).length > 0) {
+      return;
     }
+    this.setState({ ...this.state, attemptingSubmit: true });
+    const { onSubmit } = this.props;
+    if (onSubmit) {
+      const data = this._collectFormData(this.props.data);
+      onSubmit(data)
+        .then((response) => this.showBanner(response.ok))
+        .catch(() => this.showBanner(false));
+    } else {
+      const $form = ReactDOM.findDOMNode(this.form);
+      $form.submit();
+    }
+    this.setState({ ...this.state, attemptingSubmit: false });
   }
 
   showBanner(successful) {
     if (this.props.showSubmitMessage) {
-      this.setState({ ...this.state, showingApiError: !successful, showingSuccessfulSubmit: successful });
+      this.setState({ ...this.state, submitOk: successful, showingBanner: true });
+      setTimeout(() => this.setState({ ...this.state, showingBanner: false }), 5000);
     }
   }
 
@@ -444,9 +449,9 @@ class ReactForm extends React.Component {
       display: 'none',
     };
 
-    const bannerStyle = this.state.showingSuccessfulSubmit ? { color: '#FFF', backgroundColor: 'green' } : { color: '#FFF', backgroundColor: 'red' };
+    const bannerStyle = this.state.submitOk ? { color: '#FFF', backgroundColor: 'green', padding: 10 } : { color: '#FFF', backgroundColor: 'red', padding: 10 };
 
-    const bannerText = this.state.showingSuccessfulSubmit
+    const bannerText = this.state.submitOk
       ? this.props.submitMessageText ?? this.props.intl.formatMessage({ id: 'message.submit-successful' })
       : this.props.intl.formatMessage({ id: 'error.sending-request-failed' });
 
@@ -455,6 +460,8 @@ class ReactForm extends React.Component {
       registerLocale(this.props.locale, usableLocales[this.props.locale]);
       setDefaultLocale(this.props.locale);
     }
+
+    const showingSubmitButton = !this.props.hide_actions && !this.state.attemptingSubmit;
 
     return (
       <div>
@@ -471,8 +478,8 @@ class ReactForm extends React.Component {
               }
               {items}
               <div className='btn-toolbar'>
-                {!this.props.hide_actions &&
-                  this.handleRenderSubmit()
+                {
+                showingSubmitButton && this.handleRenderSubmit()
                 }
                 {!this.props.hide_actions && this.props.back_action &&
                   this.handleRenderBack()
@@ -482,8 +489,7 @@ class ReactForm extends React.Component {
             <Banner
               title={bannerText}
               css={bannerStyle}
-              showBanner={this.state.showingApiError || this.state.showingSuccessfulSubmit}
-              visibleTime={5000}
+              showBanner={this.state.showingBanner}
             />
           </div>
       </div>

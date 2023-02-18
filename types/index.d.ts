@@ -134,7 +134,7 @@ export interface FormBuilderProps {
   showCorrectColumn?: boolean;
   show_description?: boolean;
   onLoad?: () => Promise<FormBuilderPostData>;
-  onPost?: (data: FormBuilderPostData) => void;
+  onPost?: (data: FormBuilderPostData) => Promise<{ok: boolean}>;
   saveUrl?: string;
   saveAlways?: boolean;
   editMode?: boolean;
@@ -155,7 +155,7 @@ export interface FormGeneratorProps {
   form_action: string;
   form_method: string;
   action_name?: string;
-  onSubmit?: (info: FormGeneratorOnSubmitParams[]) => Promise<void>;
+  onSubmit?: (info: FormGeneratorOnSubmitParams[]) => Promise<{ok: boolean}>;
   data: any[];
   back_action?: string;
   back_name?: string;
