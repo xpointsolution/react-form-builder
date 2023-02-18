@@ -449,7 +449,7 @@ class ReactForm extends React.Component {
       display: 'none',
     };
 
-    const bannerStyle = this.state.submitOk ? { color: '#FFF', backgroundColor: 'green', padding: 10 } : { color: '#FFF', backgroundColor: 'red', padding: 10 };
+    const bannerStyle = this.state.submitOk ? { color: '#FFF', backgroundColor: 'green' } : { color: '#FFF', backgroundColor: 'red' };
 
     const bannerText = this.state.submitOk
       ? this.props.submitMessageText ?? this.props.intl.formatMessage({ id: 'message.submit-successful' })
@@ -486,11 +486,13 @@ class ReactForm extends React.Component {
                 }
               </div>
             </form>
-            <Banner
-              title={bannerText}
-              css={bannerStyle}
-              showBanner={this.state.showingBanner}
-            />
+            <div style={{ padding: 10 }}>
+              <Banner
+                title={bannerText}
+                css={bannerStyle}
+                showBanner={this.state.showingBanner}
+              />
+            </div>
           </div>
       </div>
     );
