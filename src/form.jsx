@@ -209,7 +209,7 @@ class ReactForm extends React.Component {
     }
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
 
     let errors = {};
@@ -229,12 +229,13 @@ class ReactForm extends React.Component {
     const { onSubmit } = this.props;
     if (onSubmit) {
       const data = this._collectFormData(this.props.data);
-      onSubmit(data)
+      await onSubmit(data)
         .then((response) => this.showBanner(response.ok))
         .catch(() => this.showBanner(false));
     } else {
       const $form = ReactDOM.findDOMNode(this.form);
-      $form.submit();
+
+      await $form.submit();
     }
     this.setState({ ...this.state, attemptingSubmit: false });
   }
