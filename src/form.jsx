@@ -243,7 +243,6 @@ class ReactForm extends React.Component {
   showBanner(successful) {
     if (this.props.showSubmitMessage) {
       this.setState({ ...this.state, submitOk: successful, showingBanner: true });
-      setTimeout(() => this.setState({ ...this.state, showingBanner: false }), 5000);
     }
   }
 
@@ -492,6 +491,7 @@ class ReactForm extends React.Component {
                 title={bannerText}
                 css={bannerStyle}
                 showBanner={this.state.showingBanner}
+                visibleTime={5000}
               />
             </div>
           </div>
