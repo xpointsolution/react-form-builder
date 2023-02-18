@@ -303,7 +303,11 @@ class ReactForm extends React.Component {
   }
 
   getInputElement(item) {
-    const validationMessage = this.state.errors[item.field_name];
+    let validationMessage = this.state.errors[item.field_name];
+
+    if (validationMessage && item.validationMessageOverride) {
+      validationMessage = item.validationMessageOverride;
+    }
 
     if (item.custom) {
       return this.getCustomElement(item);

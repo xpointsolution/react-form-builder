@@ -363,6 +363,10 @@ class Toolbar extends React.Component {
       elementOptions.italic = false;
     }
 
+    if (item.required) { elementOptions.required = item.required; }
+
+    if (item.validationMessageOverride) { elementOptions.validationMessageOverride = item.validationMessageOverride; }
+
     if (item.canHaveAnswer) { elementOptions.canHaveAnswer = item.canHaveAnswer; }
 
     if (item.canReadOnly) { elementOptions.readOnly = false; }

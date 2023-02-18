@@ -27,6 +27,7 @@ type BaseElement = {
     | "Range"
     | "Camera";
   showDescription?: boolean;
+  validationMessageOverride?: string;
   required: boolean;
   canHaveAlternateForm: boolean;
   canHaveDisplayHorizontal: boolean;
