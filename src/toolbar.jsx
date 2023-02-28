@@ -403,6 +403,7 @@ class Toolbar extends React.Component {
       elementOptions.showTimeSelect = item.showTimeSelect;
       elementOptions.showTimeSelectOnly = item.showTimeSelectOnly;
       elementOptions.showTimeInput = item.showTimeInput;
+      elementOptions.datePickerProps = item.datePickerProps;
     }
 
     if (item.key === 'Download') {
