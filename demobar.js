@@ -118,6 +118,7 @@ export default class Demobar extends React.Component {
                   data={this.state.data}
                   locale='en'
                   inlineValidation
+                  showSubmitMessage
                   />
 
                 <div className="modal-footer">

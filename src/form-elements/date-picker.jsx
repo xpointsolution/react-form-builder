@@ -88,7 +88,7 @@ class DatePicker extends React.Component {
   }
 
   render() {
-    const { showTimeSelect, showTimeSelectOnly, showTimeInput } = this.props.data;
+    const { showTimeSelect, showTimeSelectOnly, showTimeInput, datePickerProps } = this.props.data;
     const props = {};
     props.type = 'date';
     props.className = 'form-control';
@@ -132,11 +132,11 @@ class DatePicker extends React.Component {
             }
             { !iOS && !readOnly &&
               <ReactDatePicker
+                {...datePickerProps}
                 name={props.name}
                 ref={props.ref}
                 onChange={this.handleChange}
                 selected={this.state.internalValue}
-                todayButton={'Today'}
                 className = "form-control"
                 isClearable={true}
                 showTimeSelect={showTimeSelect}

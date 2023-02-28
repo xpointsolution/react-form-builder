@@ -6,11 +6,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { EventEmitter } from 'fbemitter';
 import { injectIntl } from 'react-intl';
-import Banner from 'react-js-banner';
 import { registerLocale, setDefaultLocale } from 'react-datepicker';
 import de from 'date-fns/locale/de';
 import en from 'date-fns/locale/en-US';
 import vi from 'date-fns/locale/vi';
+import Banner from './banner';
 import FormValidator from './form-validator';
 import FormElements from './form-elements';
 import { TwoColumnRow, ThreeColumnRow, MultiColumnRow } from './multi-column';
@@ -383,6 +383,10 @@ class ReactForm extends React.Component {
     return backButton || <a href={this.props.back_action} className='btn btn-default btn-cancel btn-big'>{backName}</a>;
   }
 
+  handleBannerToggled = (showingBanner) => {
+    this.setState({ ...this.state, showingBanner });
+  }
+
   render() {
     let data_items = this.props.data;
 
@@ -491,7 +495,7 @@ class ReactForm extends React.Component {
                 title={bannerText}
                 css={bannerStyle}
                 showBanner={this.state.showingBanner}
-                visibleTime={5000}
+                setShowBanner={this.handleBannerToggled}
               />
             </div>
           </div>
