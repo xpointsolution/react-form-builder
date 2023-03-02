@@ -1,5 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import * as React from 'react';
+import ReactDatePickerProps from 'react-datepicker';
 
 type BaseElement = {
   id: string;
@@ -27,6 +28,7 @@ type BaseElement = {
     | "Range"
     | "Camera";
   showDescription?: boolean;
+  skipValidation?: boolean;
   validationMessageOverride?: string;
   required: boolean;
   canHaveAlternateForm: boolean;
@@ -70,6 +72,7 @@ export type DateElement = {
   showTimeSelectOnly: boolean;
   showTimeInput: boolean;
   timeFormat: string;
+  datePickerProps: ReactDatePickerProps;
 } & FormBuilderInput;
 export type RangeElement = {
   max_label: string;
