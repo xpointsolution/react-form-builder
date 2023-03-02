@@ -273,7 +273,7 @@ class ReactForm extends React.Component {
               /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             );
           const checkEmail = validateEmail(emailValue);
-          if (!checkEmail) {
+          if (!item.skipValidation && !checkEmail) {
             errors[item.field_name] = `${item.label}: ${intl.formatMessage({ id: 'message.invalid-email' })}`;
           }
         }
@@ -288,7 +288,7 @@ class ReactForm extends React.Component {
             /^[+]?(1\-|1\s|1|\d{3}\-|\d{3}\s|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/g
           );
           const checkPhone = validatePhone(phoneValue);
-          if (!checkPhone) {
+          if (!item.skipValidation && !checkPhone) {
             errors[item.field_name] = `${item.label}: ${intl.formatMessage({ id: 'message.invalid-phone-number' })}`;
           }
         }
@@ -453,8 +453,6 @@ class ReactForm extends React.Component {
       display: 'none',
     };
 
-    const bannerStyle = this.state.submitOk ? { color: '#FFF', backgroundColor: 'green' } : { color: '#FFF', backgroundColor: 'red' };
-
     const bannerText = this.state.submitOk
       ? this.props.submitMessageText ?? this.props.intl.formatMessage({ id: 'message.submit-successful' })
       : this.props.intl.formatMessage({ id: 'error.sending-request-failed' });
@@ -492,8 +490,8 @@ class ReactForm extends React.Component {
             </form>
             <div style={{ padding: 10 }}>
               <Banner
+                className={this.state.submitOk ? undefined : 'banner-error'}
                 title={bannerText}
-                css={bannerStyle}
                 showBanner={this.state.showingBanner}
                 setShowBanner={this.handleBannerToggled}
               />

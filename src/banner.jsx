@@ -75,26 +75,27 @@ class Banner extends Component {
   }
 
   renderBanner() {
+    const classNames = this.props.className ? `banner ${this.props.className}` : 'banner';
     const showBanner = this.props.showBanner !== undefined ? this.props.showBanner : true;
     if (showBanner) {
       if (this.props.title && (this.state.show === undefined || this.state.show)) {
         this.hideBanner();
         return (
-          <div key="banner" className="banner" style={this.props.css}>
+          <div key="banner" className={classNames} style={this.props.css}>
             <div style={{ flex: 1 }}>
               {this.renderImage()}
               {this.renderTitle()}
             </div>
-            <a className="float-right btn btn-default btn-sm btn-danger" onClick={this.close.bind(this)}>x</a>
+            <a className="float-right btn btn-default btn-sm" onClick={this.close.bind(this)}><i className="fas fa-check"></i></a>
           </div>
         );
       } if (this.props.children) {
         return (
-          <div key="banner" className="banner" style={this.props.css}>
+          <div key="banner" className={classNames} style={this.props.css}>
             <div style={{ flex: 1 }}>
             {this.props.children}
             </div>
-            <a className="float-right btn btn-default btn-sm btn-danger" onClick={this.close.bind(this)}>x</a>
+            <a className="float-right btn btn-default btn-sm" onClick={this.close.bind(this)}><i className="fas fa-check"></i></a>
           </div>
         );
       }

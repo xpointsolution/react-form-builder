@@ -365,6 +365,8 @@ class Toolbar extends React.Component {
 
     if (item.required) { elementOptions.required = item.required; }
 
+    if (item.skipValidation) { elementOptions.skipValidation = item.skipValidation; }
+
     if (item.validationMessageOverride) { elementOptions.validationMessageOverride = item.validationMessageOverride; }
 
     if (item.canHaveAnswer) { elementOptions.canHaveAnswer = item.canHaveAnswer; }
