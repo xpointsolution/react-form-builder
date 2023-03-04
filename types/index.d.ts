@@ -26,7 +26,8 @@ type BaseElement = {
     | "Web site"
     | "File Attachment"
     | "Range"
-    | "Camera";
+    | "Camera"
+    | "Recapcha";
   showDescription?: boolean;
   skipValidation?: boolean;
   validationMessageOverride?: string;

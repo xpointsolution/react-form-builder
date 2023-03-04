@@ -87,7 +87,7 @@
   "easy": "Easy",
   "difficult": "Difficult",
   "drop-zone": "Dropzone",
-
+  "recapcha" : "reCaptcha",
   "message.is-required": "is required",
   "message.was-answered-incorrectly": "was answered incorrectly",
   "message.was-not-registered": "was not registered",

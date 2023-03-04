@@ -328,6 +328,15 @@ class Toolbar extends React.Component {
         label: intl.formatMessage({ id: 'place-holder-label' }),
         field_name: 'file_upload_',
       },
+      {
+        key: 'Recapcha',
+        name: intl.formatMessage({ id: 'recapcha' }),
+        icon: 'fas fa-user-shield',
+        sitekey: 'YOUR_API_KEY',
+        label: intl.formatMessage({ id: 'recapcha' }),
+        field_name: 'recapcha_',
+        required: true,
+      },
     ];
   }
 
@@ -420,6 +429,10 @@ class Toolbar extends React.Component {
       elementOptions.max_value = item.max_value;
       elementOptions.min_label = item.min_label;
       elementOptions.max_label = item.max_label;
+    }
+
+    if (item.key === 'Recapcha') {
+      elementOptions.sitekey = item.sitekey;
     }
 
     if (item.element === 'MultiColumnRow') {

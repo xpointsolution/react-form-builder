@@ -75,7 +75,7 @@
   "difficult": "Difficult",
 
   "drop-zone": "Khu vực kéo thả",
-
+  "recapcha" : "reCaptcha",
   "message.is-required": "không được bỏ trống",
   "message.was-answered incorrectly": "đã trả lời sai",
   "message.was-not-registered": "chưa đăng ký",

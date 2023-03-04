@@ -59,6 +59,7 @@
     "react-select": "^3.2.0",
     "react-signature-canvas": "^1.0.3",
     "react-textarea-autosize": "^7.1.2",
+    "reaptcha": "^1.12.1",
     "xss": "^1.0.8"
   },
   "peerDependencies": {

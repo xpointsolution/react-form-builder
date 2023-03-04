@@ -6,7 +6,7 @@ import CustomElement from './form-elements/custom-element';
 
 const {
   Header, Paragraph, Label, LineBreak, TextInput, EmailInput, PhoneNumber, NumberInput, TextArea, Dropdown, Checkboxes,
-  DatePicker, RadioButtons, Image, Rating, Tags, Signature, HyperLink, Download, Camera, Range, FileUpload,
+  DatePicker, RadioButtons, Image, Rating, Tags, Signature, HyperLink, Download, Camera, Range, FileUpload, Recapcha,
 } = BaseFormElements;
 
 const FormElements = {};
@@ -38,5 +38,6 @@ FormElements.TwoColumnRow = SortableElement(TwoColumnRow);
 FormElements.ThreeColumnRow = SortableElement(ThreeColumnRow);
 FormElements.MultiColumnRow = SortableElement(MultiColumnRow);
 FormElements.CustomElement = SortableElement(CustomElement);
+FormElements.Recapcha = SortableElement(Recapcha);
 
 export default FormElements;

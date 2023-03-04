@@ -18,7 +18,7 @@ import CustomElement from './form-elements/custom-element';
 import Registry from './stores/registry';
 
 const {
-  Image, Checkboxes, Signature, Download, Camera, FileUpload,
+  Image, Checkboxes, Signature, Download, Camera, FileUpload, Recapcha,
 } = FormElements;
 
 const usableLocales = {
@@ -96,6 +96,8 @@ class ReactForm extends React.Component {
       $item.value = ref.state.img;
     } else if (item.element === 'FileUpload') {
       $item.value = ref.state.fileUpload;
+    } else if (item.element === 'Recapcha') {
+      $item.value = ref.state.response;
     } else if (ref && ref.inputField && ref.inputField.current) {
       $item = ReactDOM.findDOMNode(ref.inputField.current);
       if ($item && typeof $item.value === 'string') {
@@ -152,7 +154,7 @@ class ReactForm extends React.Component {
           if ($item.value === 0) {
             invalid = true;
           }
-        } else if ($item.value === undefined || $item.value.length < 1) {
+        } else if ($item.value === undefined || $item.value === null || $item.value.length < 1) {
           invalid = true;
         }
       }
@@ -307,13 +309,7 @@ class ReactForm extends React.Component {
     return data.find(x => x.id === id);
   }
 
-  getInputElement(item) {
-    let validationMessage = this.state.errors[item.field_name];
-
-    if (validationMessage && item.validationMessageOverride) {
-      validationMessage = item.validationMessageOverride;
-    }
-
+  getInputElement(item, validationMessage) {
     if (item.custom) {
       return this.getCustomElement(item);
     }
@@ -401,6 +397,12 @@ class ReactForm extends React.Component {
     });
 
     const items = data_items.filter(x => !x.parentId).map(item => {
+      let validationMessage = this.state.errors[item.field_name];
+
+      if (validationMessage && item.validationMessageOverride) {
+        validationMessage = item.validationMessageOverride;
+      }
+
       if (!item) return null;
       switch (item.element) {
         case 'TextInput':
@@ -414,7 +416,7 @@ class ReactForm extends React.Component {
         case 'Rating':
         case 'Tags':
         case 'Range':
-          return this.getInputElement(item);
+          return this.getInputElement(item, validationMessage);
         case 'CustomElement':
           return this.getCustomElement(item);
         case 'MultiColumnRow':
@@ -433,8 +435,8 @@ class ReactForm extends React.Component {
           return <Download download_path={this.props.download_path} mutable={true} key={`form_${item.id}`} data={item} />;
         case 'Camera':
           return <Camera ref={c => this.inputs[item.field_name] = c} read_only={this.props.read_only || item.readOnly} mutable={true} key={`form_${item.id}`} data={item} defaultValue={this._getDefaultValue(item)} />;
-          case 'FileUpload':
-            return (
+        case 'FileUpload':
+          return (
               <FileUpload
                 ref={(c) => (this.inputs[item.field_name] = c)}
                 read_only={this.props.read_only || item.readOnly}
@@ -443,6 +445,18 @@ class ReactForm extends React.Component {
                 data={item}
                 defaultValue={this._getDefaultValue(item)}
               />
+          );
+        case 'Recapcha':
+          return (
+          <Recapcha
+            key={`form_${item.id}`}
+            ref={(c) => (this.inputs[item.field_name] = c)}
+            read_only={this.props.read_only || item.readOnly}
+            mutable={true}
+            data={item}
+            validationMessage={validationMessage}
+            inlineValidation={this.props.inlineValidation}
+            />
             );
         default:
           return this.getSimpleElement(item);
