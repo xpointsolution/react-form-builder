@@ -18,7 +18,7 @@ import CustomElement from './form-elements/custom-element';
 import Registry from './stores/registry';
 
 const {
-  Image, Checkboxes, Signature, Download, Camera, FileUpload, Recapcha,
+  Image, Checkboxes, Signature, Download, Camera, FileUpload, Recaptcha,
 } = FormElements;
 
 const usableLocales = {
@@ -96,7 +96,7 @@ class ReactForm extends React.Component {
       $item.value = ref.state.img;
     } else if (item.element === 'FileUpload') {
       $item.value = ref.state.fileUpload;
-    } else if (item.element === 'Recapcha') {
+    } else if (item.element === 'Recaptcha') {
       $item.value = ref.state.response;
     } else if (ref && ref.inputField && ref.inputField.current) {
       $item = ReactDOM.findDOMNode(ref.inputField.current);
@@ -446,9 +446,9 @@ class ReactForm extends React.Component {
                 defaultValue={this._getDefaultValue(item)}
               />
           );
-        case 'Recapcha':
+        case 'Recaptcha':
           return (
-          <Recapcha
+          <Recaptcha
             key={`form_${item.id}`}
             ref={(c) => (this.inputs[item.field_name] = c)}
             read_only={this.props.read_only || item.readOnly}

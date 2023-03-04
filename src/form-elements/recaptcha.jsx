@@ -3,7 +3,7 @@ import Reaptcha from 'reaptcha';
 import ComponentHeader from './component-header';
 import ComponentLabel from './component-label';
 
-class Recapcha extends React.Component {
+class Recaptcha extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -59,4 +59,4 @@ class Recapcha extends React.Component {
       }
 }
 
-export default Recapcha;
+export default Recaptcha;

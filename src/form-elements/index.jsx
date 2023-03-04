@@ -8,7 +8,7 @@ import ReactBootstrapSlider from 'react-bootstrap-slider';
 
 import StarRating from './star-rating';
 import DatePicker from './date-picker';
-import Recapcha from './recapcha';
+import Recaptcha from './recaptcha';
 import ComponentHeader from './component-header';
 import ComponentLabel from './component-label';
 import myxss from './myxss';
@@ -1023,6 +1023,6 @@ FormElements.Download = Download;
 FormElements.Camera = Camera;
 FormElements.FileUpload = FileUpload;
 FormElements.Range = Range;
-FormElements.Recapcha = Recapcha;
+FormElements.Recaptcha = Recaptcha;
 
 export default FormElements;
