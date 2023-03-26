@@ -94,7 +94,7 @@ class DatePicker extends React.Component {
     props.className = 'form-control';
     props.name = this.props.data.field_name;
     const readOnly = this.props.data.readOnly || this.props.read_only;
-    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    // const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     const placeholderText = this.state.formatMask.toLowerCase();
 
     if (this.props.mutable) {
@@ -120,7 +120,7 @@ class DatePicker extends React.Component {
                      value={this.state.value}
                      className="form-control" />
             }
-            { iOS && !readOnly &&
+            {/* { iOS && !readOnly &&
               <input type="date"
                      name={props.name}
                      ref={props.ref}
@@ -129,8 +129,8 @@ class DatePicker extends React.Component {
                      placeholder={this.state.placeholder}
                      value={this.state.value}
                      className = "form-control" />
-            }
-            { !iOS && !readOnly &&
+            } */}
+            {!readOnly &&
               <ReactDatePicker
                 {...datePickerProps}
                 name={props.name}
@@ -145,7 +145,8 @@ class DatePicker extends React.Component {
                 dateFormat={this.state.formatMask}
                 portalId="root-portal"
                 autoComplete="off"
-                placeholderText={placeholderText} />
+                placeholderText={placeholderText}
+                />
             }
           </div>
         </div>
