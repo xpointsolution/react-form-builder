@@ -70,6 +70,7 @@ export type DateElement = {
   defaultToday: boolean;
   readOnly: boolean;
   showTimeSelect: boolean;
+  showYearPicker: boolean;
   showTimeSelectOnly: boolean;
   showTimeInput: boolean;
   timeFormat: string;
