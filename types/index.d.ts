@@ -71,6 +71,7 @@ export type DateElement = {
   readOnly: boolean;
   showTimeSelect: boolean;
   showYearPicker: boolean;
+  showYearDropdown: boolean;
   showTimeSelectOnly: boolean;
   showTimeInput: boolean;
   timeFormat: string;

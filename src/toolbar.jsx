@@ -413,6 +413,7 @@ class Toolbar extends React.Component {
       elementOptions.timeFormat = item.timeFormat;
       elementOptions.showTimeSelect = item.showTimeSelect;
       elementOptions.showYearPicker = item.showYearPicker;
+      elementOptions.showYearDropdown = item.showYearDropdown;
       elementOptions.showTimeSelectOnly = item.showTimeSelectOnly;
       elementOptions.showTimeInput = item.showTimeInput;
       elementOptions.datePickerProps = item.datePickerProps;
