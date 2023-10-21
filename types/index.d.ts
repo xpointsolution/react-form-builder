@@ -179,6 +179,7 @@ export interface FormGeneratorProps {
   inlineValidation?: boolean;
   submitMessageText?: string;
   showSubmitMessage?: boolean;
+  useOptionNameInsteadOfKey?: boolean;
 }
 
 export class ReactFormGenerator extends React.Component<FormGeneratorProps> {}

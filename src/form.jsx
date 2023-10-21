@@ -174,7 +174,7 @@ class ReactForm extends React.Component {
       item.options.forEach(option => {
         const $option = ReactDOM.findDOMNode(ref.options[`child_ref_${option.key}`]);
         if ($option.checked) {
-          checked_options.push(option.key);
+          checked_options.push(this.props.useOptionNameInsteadOfKey ? option.text : option.key);
         }
       });
       itemData.value = checked_options;
@@ -272,7 +272,7 @@ class ReactForm extends React.Component {
         if (emailValue) {
             const validateEmail = (email) => email.match(
               // eslint-disable-next-line no-useless-escape
-              /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+              /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             );
           const checkEmail = validateEmail(emailValue);
           if (!item.skipValidation && !checkEmail) {
@@ -287,7 +287,7 @@ class ReactForm extends React.Component {
         if (phoneValue) {
           const validatePhone = (phone) => phone.match(
             // eslint-disable-next-line no-useless-escape
-            /^[+]?(1\-|1\s|1|\d{3}\-|\d{3}\s|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/g
+            /^[+]?(1\-|1\s|1|\d{3}\-|\d{3}\s|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/g,
           );
           const checkPhone = validatePhone(phoneValue);
           if (!item.skipValidation && !checkPhone) {
