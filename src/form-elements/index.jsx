@@ -337,7 +337,7 @@ class Dropdown extends React.Component {
           <select {...props} className={inputClasses}>
             {this.props.data.options.map((option) => {
               const this_key = `preview_${option.key}`;
-              return <option value={option.value} key={this_key}>{option.text}</option>;
+              return <option value={option.text} key={this_key}>{option.text}</option>;
             })}
           </select>
           {showValidationErrors &&
@@ -689,7 +689,7 @@ class Camera extends React.Component {
 
   displayImage = (e) => {
     const self = this;
-    const target = e.target;
+    const { target } = e;
     if (target.files && target.files.length) {
       self.setState({ img: target.files[0], previewImg: URL.createObjectURL(target.files[0]) });
     }
@@ -797,7 +797,7 @@ class FileUpload extends React.Component {
 
   displayFileUpload = (e) => {
     const self = this;
-    const target = e.target;
+    const { target } = e;
     let file;
 
     if (target.files && target.files.length > 0) {
@@ -893,10 +893,10 @@ class FileUpload extends React.Component {
                     <div style={{ display: 'inline-block', marginLeft: '5px' }}>
                       {this.state.fileUpload.size.length > 6
                         ? `Size:  ${Math.ceil(
-                            this.state.fileUpload.size / (1024 * 1024)
+                            this.state.fileUpload.size / (1024 * 1024),
                           )} mb`
                         : `Size:  ${Math.ceil(
-                            this.state.fileUpload.size / 1024
+                            this.state.fileUpload.size / 1024,
                           )} kb`}
                     </div>
                   </div>
